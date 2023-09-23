@@ -4,6 +4,9 @@ public class Main {
 
         Produto produto1 = new Produto(1, "Camisa do Gremio", 399.90);
         Produto produto2 = new Produto(2, "Baralho de Truco", 14.50);
+        Produto produto3 = new Produto(3, "Fogão", 879.00);
+        Produto produto4 = new Produto(4, "Ferro de Passar", 450.00);
+
 
         estoque.cadastraProduto(produto1, 50);
         estoque.cadastraProduto(produto2, 20);
