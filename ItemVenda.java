@@ -10,26 +10,22 @@ public class ItemVenda {
 
     public double calculaPreçoItem() {
         return produto.getPrecoUnitario() * quantidadeDesejada;
-    }
-
-    /*
-    public double valorFinal() {
-    if(valorTotal > 250) {
-        double desconto = valorTotal * 0.10;
-        double valorDesconto = valorTotal - desconto;
-        double valorImposto = valorDesconto * 1.25;
-        return valorImposto;
-    }
-        else {
-
-        double valorImposto = valorTotal *1.25;
-        return valorImposto;
-
-        }
 
     }
-                    **NÃO SABIA ONDE BOTAR ENTÃO SÓ FIZ O METODO E DEIXEI AQUI
-    */
+
+    public int getQuantidadeDesejada() {
+        return quantidadeDesejada;
+    }
+
+    public double getValorItem() {
+        return calculaPreçoItem();
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+
 
 
 
