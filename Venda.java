@@ -21,10 +21,10 @@ public class Venda {
             return false;
         }
 
-        // Use o método getCodigo do produto para obter o código
+
         int codigoDoProduto = produto.getCodigo();
 
-        // Aqui você pode criar o VendaItem com o código e a quantidade desejados
+
         ItemVenda item = new ItemVenda(produto, quantidade);
         itens.add(item);
         return true;
