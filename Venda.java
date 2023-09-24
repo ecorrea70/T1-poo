@@ -2,34 +2,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Venda {
-
-
-
     private static final double IMPOSTO = 0.25; // 25% de imposto
     private int numero;
     private List<ItemVenda> itens = new ArrayList<>();
     private boolean concluida = false;
+    private Estoque estoque;
 
-    public Venda(int numero) {
-        this.numero = numero;
+    public Venda(int numero, Estoque estoque) {
+        this.numero=numero;
+        this.estoque=estoque;
     }
-
 
     public boolean insereItem(Produto produto, int quantidade) {
         if (concluida) {
             System.out.println("A venda já foi concluída. Não é possível adicionar mais itens.");
             return false;
         }
-
-        // Use o método getCodigo do produto para obter o código
         int codigoDoProduto = produto.getCodigo();
+        int quantidadeDisponivel = estoque.getQuantidadeDisponivel(codigoDoProduto);
 
-        // Aqui você pode criar o itemVenda com o código e a quantidade desejados
-        ItemVenda item = new ItemVenda(produto, quantidade);
-        itens.add(item);
-        return true;
+        if (quantidadeDisponivel >= quantidade) {
+            ItemVenda item = new ItemVenda(produto, quantidade);
+            itens.add(item);
+
+            estoque.baixaEstoque(codigoDoProduto, quantidade);
+            return true;
+        } else {
+            System.out.println("Quantidade insuficiente em estoque para adicionar este item.");
+            return false;
+        }
     }
-
 
 
     public void imprimeRecibo() {
@@ -59,10 +61,11 @@ public class Venda {
     public double getSubtotal() {
         double subtotal = 0;
         for (ItemVenda item : itens) {
-            subtotal = item.getValorItem(); // Subtotal = Preço do produto.
+            subtotal += item.getValorItem(); // Acumula o valor de cada item
         }
         return subtotal;
     }
+
 
     public double getTotal() {
         return getSubtotal() - getDesconto() + getImposto();
