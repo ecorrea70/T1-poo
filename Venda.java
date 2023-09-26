@@ -24,8 +24,6 @@ public class Venda {
         if (quantidadeDisponivel >= quantidade) {
             ItemVenda item = new ItemVenda(produto, quantidade);
             itens.add(item);
-
-            estoque.baixaEstoque(codigoDoProduto, quantidade);
             return true;
         } else {
             System.out.println("Quantidade insuficiente em estoque para adicionar este item.");
@@ -91,6 +89,15 @@ public class Venda {
 
     public boolean conclui() {
         if (!concluida) {
+            for (ItemVenda item : itens) {
+                Produto produto = item.getProduto();
+                int quantidade = item.getQuantidadeDesejada();
+                int codigoDoProduto = produto.getCodigo();
+
+                // Baixa a quantidade do item no estoque
+                estoque.baixaEstoque(codigoDoProduto, quantidade);
+            }
+
             concluida = true;
             return true;
         } else {
@@ -98,6 +105,7 @@ public class Venda {
             return false;
         }
     }
+
 
     public int getNumero() {
         return numero;

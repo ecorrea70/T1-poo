@@ -1,17 +1,33 @@
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         Estoque estoque = new Estoque();
         HistoricoVendas historico = new HistoricoVendas();
+        CatalogoProdutos catalogo = new CatalogoProdutos();
 
         //criação de produtos
         Produto produto1 = new Produto(1, "Camisa do Gremio", 399.90);
         Produto produto2 = new Produto(2, "Baralho de Truco", 14.50);
         Produto produto3 = new Produto(3, "Fogão", 879.00);
         Produto produto4 = new Produto(4, "Ferro de Passar", 450.00);
+        catalogo.cadastraProduto(produto1);
+        catalogo.cadastraProduto(produto2);
+        catalogo.cadastraProduto(produto3);
+        catalogo.cadastraProduto(produto4);
         estoque.cadastraProduto(produto1, 50);
         estoque.cadastraProduto(produto2, 20);
         estoque.cadastraProduto(produto3, 20);
         estoque.cadastraProduto(produto4, 30);
+
+
+        //verifica os produtos cadastrados
+        List<Produto> produtos = catalogo.getProdutos();
+        System.out.println("Produtos cadastrados:");
+        for (Produto produto : produtos) {
+            System.out.println("Descrição: " + produto.getDescricao());
+        }
+
 
 
         //realiza uma venda, conclui, cadastra ela no historico e imprime o recibo da mesma
@@ -56,7 +72,6 @@ public class Main {
 
         //consulta as ultimas 5 vendas e mostra o recibo de cada uma delas
         Venda[] ultimasVendas = historico.getUltimasVendas(5);
-
         for (Venda venda : ultimasVendas) {
             if (venda != null) {
                 venda.imprimeRecibo();

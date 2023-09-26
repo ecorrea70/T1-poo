@@ -13,6 +13,14 @@ public class CatalogoProdutos {
         return true;
     }
 
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
     public Produto getProduto(int index) {
         if (index >= 0 && index < produtos.size()) {
             return produtos.get(index);
